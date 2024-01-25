@@ -24,6 +24,25 @@ const Home: React.FC = () => {
   const [data, setData] = useState([]);
   const [selectedGen, setSelectedGen] = useState('1');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Ajouter un état pour la page actuelle
+  const itemsPerPage = 30;
+
+  // Calculer les index de début et de fin pour la page actuelle
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Obtenir seulement les éléments de data qui correspondent à la page actuelle
+  const currentData = data.slice(startIndex, endIndex);
+
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  const handleNextPageClick = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    } else {
+      setCurrentPage(1); // Si nous sommes à la dernière page, revenir à la première page
+    }
+  };
 
   useEffect(() => {
     document.title = `React - TS - Webpack - Template`;
@@ -65,9 +84,13 @@ const Home: React.FC = () => {
           {isLoading ? (
             <p>Chargement...</p> // Afficher un indicateur de chargement si les données sont en cours de chargement
           ) : (
-            <Grid data={data} />
+            <Grid data={currentData} />
           )}
         </section>
+        <div className="pagination">
+          <button onClick={() => setCurrentPage(currentPage - 1)}>Page précédente</button>
+          <button onClick={handleNextPageClick}>Page suivante</button>
+        </div>
       </main>
     </React.Fragment>
   );
