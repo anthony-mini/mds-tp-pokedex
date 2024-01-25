@@ -1,0 +1,8 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './reset.scss';
+@import './base.scss';
+
+@import './../pages/Home/home.scss';
