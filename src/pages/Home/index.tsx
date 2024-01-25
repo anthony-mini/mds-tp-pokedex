@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Button, Select, Grid } from '../../components';
 import { getAllGen } from '../../services';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const selectGenNumber = [
   { value: '1', label: 'Gen 1' },
@@ -9,29 +11,21 @@ const selectGenNumber = [
   { value: '4', label: 'Gen 4' },
   { value: '5', label: 'Gen 5' },
   { value: '6', label: 'Gen 6' },
-  { value: '7', label: 'Gen 7' },
-  { value: '8', label: 'Gen 8' },
-  { value: '9', label: 'Gen 9' }
+  { value: '7', label: 'Gen 7' }
+  // { value: '8', label: 'Gen 8' },
+  // { value: '9', label: 'Gen 9' }
 ];
-
-// const filterAge = [
-//   { value: '0', label: 'Mixed Age' },
-//   { value: '1', label: 'Asc' },
-//   { value: '2', label: 'Desc' }
-// ];
 
 const Home: React.FC = () => {
   const [data, setData] = useState([]);
   const [selectedGen, setSelectedGen] = useState('1');
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1); // Ajouter un état pour la page actuelle
-  const itemsPerPage = 30;
+  const itemsPerPage = 50;
 
-  // Calculer les index de début et de fin pour la page actuelle
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  // Obtenir seulement les éléments de data qui correspondent à la page actuelle
   const currentData = data.slice(startIndex, endIndex);
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -49,19 +43,15 @@ const Home: React.FC = () => {
 
     const fetchData = async () => {
       setIsLoading(true);
-      const response = await getAllGen(selectedGen); // Convertir selectedGen en nombre
+      const response = await getAllGen(selectedGen);
       setData(response);
       setIsLoading(false);
     };
     fetchData();
-  }, [selectedGen]); // Ajouter selectedGen comme dépendance
+  }, [selectedGen]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedGen(event.target.value);
-  };
-
-  const handleButtonClick = () => {
-    getAllGen(selectedGen);
   };
 
   return (
@@ -70,27 +60,33 @@ const Home: React.FC = () => {
       <main className="mx-6">
         <section className="flex">
           <div className="action-list">
-            <div className="button">
-              <Button text="Fetch Users" onClick={handleButtonClick} />
-              {/* <Button text="Clear Filter" onClick={()} /> */}
-            </div>
-            <div className="select">
-              <Select options={selectGenNumber} value={selectedGen} onChange={handleSelectChange} />
-              {/* <Select options={filterAge} /> */}
-            </div>
+            <div className="button">{/* <Button text="Clear Filter" onClick={()} /> */}</div>
           </div>
         </section>
         <section className="my-6">
+          {/* TODO : Refacto (component)*/}
+          <div className="pagination flex justify-end space-x-4 mt-4 space-x-5">
+            <Select options={selectGenNumber} value={selectedGen} onChange={handleSelectChange} />
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`h-8 w-8 px-3 py-0.25 border rounded-md w-30 bg-blue-500 text-white`}>
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            <span className="self-center">{`Page ${currentPage} sur ${totalPages}`}</span>
+            <button
+              onClick={handleNextPageClick}
+              className={`h-8 w-8 px-3 py-0.25 border rounded-md w-30 bg-blue-500 text-white`}>
+              <FontAwesomeIcon icon={faArrowRight} className="icon-arrow" />
+            </button>
+            <div className="animate-spin-slow h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
+          </div>
           {isLoading ? (
-            <p>Chargement...</p> // Afficher un indicateur de chargement si les données sont en cours de chargement
+            <div className="animate-spin-slow h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
           ) : (
             <Grid data={currentData} />
           )}
         </section>
-        <div className="pagination">
-          <button onClick={() => setCurrentPage(currentPage - 1)}>Page précédente</button>
-          <button onClick={handleNextPageClick}>Page suivante</button>
-        </div>
       </main>
     </React.Fragment>
   );
