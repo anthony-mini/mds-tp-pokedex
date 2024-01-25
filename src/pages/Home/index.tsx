@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Button, Select, Grid } from '../../components';
-import { fetchUsersData } from '../../services';
+import { getAllGen1 } from '../../services';
 
 const filterGender = [
   { value: '0', label: 'All Gender' },
@@ -17,13 +17,21 @@ const filterAge = [
 const Home: React.FC = () => {
   useEffect(() => {
     document.title = `React - TS - Webpack - Template`;
+
+    const fetchData = async () => {
+      const response = await getAllGen1();
+      setData(response);
+    };
+
+    fetchData();
   }, []);
 
   const [data, setData] = useState([]);
 
   const handleButtonClick = async () => {
-    const response = await fetchUsersData();
+    const response = await getAllGen1();
     setData(response);
+    console.log(data);
   };
 
   return (
@@ -34,7 +42,7 @@ const Home: React.FC = () => {
           <div className="action-list">
             <div className="button">
               <Button text="Fetch Users" onClick={handleButtonClick} />
-              <Button text="Clear Filter" onClick={handleButtonClick} />
+              {/* <Button text="Clear Filter" onClick={()} /> */}
             </div>
             <div className="select">
               <Select options={filterGender} />

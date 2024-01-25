@@ -1,1 +1,1 @@
-export { default as fetchUsersData } from './getUsersData';
+export { default as getAllGen1 } from './getAll/pokemon-list';

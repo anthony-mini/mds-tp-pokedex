@@ -1,21 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Type, Talent, Data } from '../../interfaces';
 import SVGMemes from '../../assets/doge-hand-drawn.svg';
-import DataModels from '../../models/data-interface.tsx';
-import UserModels from '../../models/user-interface.tsx';
-
-const transformDataToUser = (data: Data): User => {
-  return {
-    id: data.login.uuid,
-    photo: data.picture.thumbnail,
-    name: `${data.name.first} ${data.name.last}`,
-    email: data.email,
-    phone: data.phone,
-    website: data.login.uuid
-  };
-};
 
 const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
-  const users: User[] = data.map(transformDataToUser);
   return (
     <>
       <div className="flex flex-col items-center justify-center">
@@ -29,53 +16,46 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                 Nom
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Age
+                Type
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Genre
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tel
+                Talents
               </th>
             </tr>
           </thead>
-          {data.length > 0 && (
+          {data.length === 0 ? (
+            <tbody className="bg-white">
+              <tr>
+                <td colSpan={4} className="px-6 py-10 whitespace-nowrap text-center">
+                  <div className="flex justify-center items-center flex-col space-y-5">
+                    <p className="text-lg font-semibold">Veuillez récupérer les Pokémons</p>
+                    <img className="animate-blink w-20" src={SVGMemes} alt="dog-memes" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          ) : (
             <tbody className="bg-white divide-y divide-gray-200">
-              {data.map((user) => (
-                <tr key={user.login.uuid}>
+              {data.map((pokemon) => (
+                <tr key={pokemon.pokedexId}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src={user.picture.thumbnail}
-                      alt="user"
+                      src={pokemon.sprites.regular}
+                      alt={pokemon.name.fr}
                     />
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap">{pokemon.name.fr}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {user.name.first} {user.name.last}
+                    {pokemon.types.map((type: Type) => type.name).join(', ')}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.dob.age}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {user.gender === 'male' ? '🥸' : '😈'}
+                    {pokemon.talents.map((talent: Talent) => talent.name).join(', ')}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.phone}</td>
                 </tr>
               ))}
             </tbody>
           )}
-          <tbody className="bg-white">
-            <tr>
-              <td colSpan={6} className="px-6 py-10 whitespace-nowrap text-center">
-                <div className="flex justify-center items-center flex-col space-y-5">
-                  <p className="text-lg font-semibold">Please Fetch Users</p>
-                  <img className="animate-blink w-20" src={SVGMemes} alt="dog-memes" />
-                </div>
-              </td>
-            </tr>
-          </tbody>
         </table>
       </div>
     </>
