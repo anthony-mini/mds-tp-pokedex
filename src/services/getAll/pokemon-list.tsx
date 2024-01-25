@@ -1,6 +1,6 @@
-const getAllGen1 = async () => {
+const getAllGen = async (gen: string) => {
   try {
-    const response = await fetch('https://tyradex.vercel.app/api/v1/gen/1');
+    const response = await fetch(`https://tyradex.vercel.app/api/v1/gen/${gen}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -8,4 +8,4 @@ const getAllGen1 = async () => {
   }
 };
 
-export default getAllGen1;
+export default getAllGen;
