@@ -40,7 +40,7 @@ const Home: React.FC = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     } else {
-      setCurrentPage(1); // Si nous sommes à la dernière page, revenir à la première page
+      setCurrentPage(1);
     }
   };
 
