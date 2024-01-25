@@ -70,3 +70,14 @@ export interface Data {
   level_100: number;
   forme: string | null;
 }
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+export interface SelectProps {
+  options: Option[];
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}

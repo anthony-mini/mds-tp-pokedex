@@ -1,1 +1,1 @@
-export { default as getAllGen1 } from './getAll/pokemon-list';
+export { default as getAllGen } from './getAll/pokemon-list';
