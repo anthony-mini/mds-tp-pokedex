@@ -10,6 +10,9 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                #
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Photo
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -26,10 +29,18 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
           {data.length === 0 ? (
             <tbody className="bg-white">
               <tr>
-                <td colSpan={4} className="px-6 py-10 whitespace-nowrap text-center">
+                <td
+                  colSpan={4}
+                  className="px-6 py-10 whitespace-nowrap text-center">
                   <div className="flex justify-center items-center flex-col space-y-5">
-                    <p className="text-lg font-semibold">Veuillez récupérer les Pokémons</p>
-                    <img className="animate-blink w-20" src={SVGMemes} alt="dog-memes" />
+                    <p className="text-lg font-semibold">
+                      Veuillez récupérer les Pokémons
+                    </p>
+                    <img
+                      className="animate-blink w-20"
+                      src={SVGMemes}
+                      alt="dog-memes"
+                    />
                   </div>
                 </td>
               </tr>
@@ -39,18 +50,27 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
               {data.map((pokemon) => (
                 <tr key={pokemon.pokedexId}>
                   <td className="px-6 py-4 whitespace-nowrap">
+                    {pokemon.pokedexId}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <img
-                      className="h-10 w-10 rounded-full"
-                      src={pokemon.sprites.regular}
-                      alt={pokemon.name.fr}
+                      className="h-20 w-20 rounded-full"
+                      src={pokemon.sprites?.regular}
+                      alt={pokemon.name?.fr}
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{pokemon.name.fr}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {pokemon.types.map((type: Type) => type.name).join(', ')}
+                    {pokemon.name?.fr}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {pokemon.talents.map((talent: Talent) => talent.name).join(', ')}
+                    {pokemon.types &&
+                      pokemon.types.map((type: Type) => type.name).join(', ')}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {pokemon.talents &&
+                      pokemon.talents
+                        .map((talent: Talent) => talent.name)
+                        .join(', ')}
                   </td>
                 </tr>
               ))}
