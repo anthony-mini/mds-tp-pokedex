@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Button, Select, Grid } from '../../components';
-import { getAllPokemonByGeneration } from '../../services';
+import { Header, Select, Grid } from '../../components';
+import { getAllPokemon, getAllPokemonByGeneration } from '../../services';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const selectGenNumber = [
+  { value: '0', label: 'All' },
   { value: '1', label: 'Gen 1' },
   { value: '2', label: 'Gen 2' },
   { value: '3', label: 'Gen 3' },
   { value: '4', label: 'Gen 4' },
   { value: '5', label: 'Gen 5' },
   { value: '6', label: 'Gen 6' },
-  { value: '7', label: 'Gen 7' }
-  // { value: '8', label: 'Gen 8' },
-  // { value: '9', label: 'Gen 9' }
+  { value: '7', label: 'Gen 7' },
+  { value: '8', label: 'Gen 8' },
+  { value: '9', label: 'Gen 9' }
 ];
 
 const Home: React.FC = () => {
@@ -43,10 +44,16 @@ const Home: React.FC = () => {
 
     const fetchData = async () => {
       setIsLoading(true);
-      const response = await getAllPokemonByGeneration(selectedGen);
+      let response;
+      if (selectedGen === '0') {
+        response = await getAllPokemon();
+      } else {
+        response = await getAllPokemonByGeneration(selectedGen);
+      }
       setData(response);
       setIsLoading(false);
     };
+
     fetchData();
   }, [selectedGen]);
 

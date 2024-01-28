@@ -41,16 +41,17 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src={pokemon.sprites.regular}
-                      alt={pokemon.name.fr}
+                      src={pokemon.sprites?.regular}
+                      alt={pokemon.name?.fr}
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{pokemon.name.fr}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{pokemon.name?.fr}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {pokemon.types.map((type: Type) => type.name).join(', ')}
+                    {pokemon.types && pokemon.types.map((type: Type) => type.name).join(', ')}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {pokemon.talents.map((talent: Talent) => talent.name).join(', ')}
+                    {pokemon.talents &&
+                      pokemon.talents.map((talent: Talent) => talent.name).join(', ')}
                   </td>
                 </tr>
               ))}
