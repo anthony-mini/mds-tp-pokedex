@@ -1,4 +1,4 @@
-const getAllGen = async (gen: string) => {
+const getAllPokemonByGeneration = async (gen: string) => {
   try {
     const response = await fetch(`https://tyradex.vercel.app/api/v1/gen/${gen}`);
     const data = await response.json();
@@ -8,4 +8,4 @@ const getAllGen = async (gen: string) => {
   }
 };
 
-export default getAllGen;
+export default getAllPokemonByGeneration;

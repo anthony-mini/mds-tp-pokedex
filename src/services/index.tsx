@@ -1,1 +1,1 @@
-export { default as getAllGen } from './getAll/pokemon-list';
+export { default as getAllPokemonByGeneration } from './pokemon-service/get-all-pokemon-by-generation';

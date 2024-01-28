@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Button, Select, Grid } from '../../components';
-import { getAllGen } from '../../services';
+import { getAllPokemonByGeneration } from '../../services';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
 
     const fetchData = async () => {
       setIsLoading(true);
-      const response = await getAllGen(selectedGen);
+      const response = await getAllPokemonByGeneration(selectedGen);
       setData(response);
       setIsLoading(false);
     };
