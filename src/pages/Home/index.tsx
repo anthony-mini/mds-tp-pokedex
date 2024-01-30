@@ -63,7 +63,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </section>
-        <section>
+        <section className="mb-6">
           {/* TODO : Refacto (component)*/}
           <div className="pagination flex justify-end space-x-4 space-x-5 mb-6">
             <Select
