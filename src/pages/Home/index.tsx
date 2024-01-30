@@ -63,9 +63,9 @@ const Home: React.FC = () => {
             </div>
           </div>
         </section>
-        <section className="my-6">
+        <section className="mb-6">
           {/* TODO : Refacto (component)*/}
-          <div className="pagination flex justify-end space-x-4 mt-4 space-x-5 mb-10">
+          <div className="pagination flex justify-end space-x-4 space-x-5 mb-6">
             <Select
               options={selectGenNumber}
               value={selectedGen}
