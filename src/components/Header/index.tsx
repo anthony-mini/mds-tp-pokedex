@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <>
       <header
-        className="fixed w-full bg-gray-600 py-6 px-4 shadow-lg flex justify-center items-center relative"
+        className="fixed w-full bg-black py-6 px-4 shadow-lg flex justify-center items-center relative"
         id="header">
         <img
           src={pokeball}
