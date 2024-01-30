@@ -11,13 +11,13 @@ export interface Sprites {
 }
 
 export interface Type {
-  name: string;
-  image: string;
+  name?: string;
+  image?: string;
 }
 
 export interface Talent {
-  name: string;
-  tc: boolean;
+  name?: string;
+  tc?: boolean;
 }
 
 export interface Stats {
@@ -52,23 +52,23 @@ export interface Sexe {
 }
 
 export interface Data {
-  pokedexId: number;
-  generation: number;
-  category: string;
-  name: Name;
-  sprites: Sprites;
-  types: Type[];
-  talents: Talent[];
-  stats: Stats;
-  resistances: Resistance[];
-  evolution: EvolutionChain;
-  height: string;
-  weight: string;
-  egg_groups: string[];
-  sexe: Sexe;
-  catch_rate: number;
-  level_100: number;
-  forme: string | null;
+  pokedexId?: number;
+  generation?: number;
+  category?: string;
+  name?: Name;
+  sprites?: Sprites;
+  types?: Type[];
+  talents?: Talent[];
+  stats?: Stats;
+  resistances?: Resistance[];
+  evolution?: EvolutionChain;
+  height?: string;
+  weight?: string;
+  egg_groups?: string[];
+  sexe?: Sexe;
+  catch_rate?: number;
+  level_100?: number;
+  forme?: string | null;
 }
 
 interface Option {
