@@ -84,12 +84,25 @@ const Home: React.FC = () => {
             <div className="animate-spin-slow h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
           ) : (
             <>
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Rechercher un Pokémon"
-              />
+              <div className="flex ">
+                <input
+                  list="pokemon-names"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="p-2 m-2 border bg-gray-100 rounded-md w-[200px] focus:border-blue-500"
+                  placeholder="Search a pokemon ..."
+                />
+                <datalist id="pokemon-names">
+                  {currentData.map(
+                    (pokemon) =>
+                      pokemon.name && (
+                        <option key={pokemon.pokedexId} value={pokemon.name.fr}>
+                          {pokemon.name.fr}
+                        </option>
+                      )
+                  )}
+                </datalist>
+              </div>
               {currentData && (
                 <Grid
                   data={currentData.filter(
