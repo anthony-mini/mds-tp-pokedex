@@ -52,7 +52,7 @@ export interface Sexe {
 }
 
 export interface Data {
-  pokedexId?: number;
+  pokedexId: number;
   generation?: number;
   category?: string;
   name?: Name;

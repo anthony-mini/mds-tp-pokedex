@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Select, Grid, Pagination } from '../../components';
 import { getAllPokemon, getAllPokemonByGeneration } from '../../services';
+import { Data } from '../../interfaces';
 
 const selectGenNumber = [
   { value: '0', label: 'All' },
@@ -16,11 +17,12 @@ const selectGenNumber = [
 ];
 
 const Home: React.FC = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Data[]>([]);
   const [selectedGen, setSelectedGen] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 50;
+  const [search, setSearch] = useState('');
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -81,7 +83,38 @@ const Home: React.FC = () => {
           {isLoading ? (
             <div className="animate-spin-slow h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
           ) : (
-            <Grid data={currentData} />
+            <>
+              <div className="flex ">
+                <input
+                  list="pokemon-names"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="p-2 m-2 border bg-gray-100 rounded-md w-[200px] focus:border-blue-500"
+                  placeholder="Search a pokemon ..."
+                />
+                <datalist id="pokemon-names">
+                  {currentData.map(
+                    (pokemon) =>
+                      pokemon.name && (
+                        <option key={pokemon.pokedexId} value={pokemon.name.fr}>
+                          {pokemon.name.fr}
+                        </option>
+                      )
+                  )}
+                </datalist>
+              </div>
+              {currentData && (
+                <Grid
+                  data={currentData.filter(
+                    (pokemon) =>
+                      pokemon.name &&
+                      pokemon.name.fr
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                  )}
+                />
+              )}
+            </>
           )}
         </section>
       </main>
