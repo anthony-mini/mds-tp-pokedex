@@ -7,6 +7,7 @@ const Cards = () => {
   const { id } = useParams();
   const [pokemon, setPokemon] = useState<Data>();
   const [isFlipped, setIsFlipped] = useState(false);
+  const [cardClass, setCardClass] = useState('card-default');
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -25,8 +26,77 @@ const Cards = () => {
     fetchPokemon();
   }, [id]);
 
+  useEffect(() => {
+    if (pokemon && pokemon.types) {
+      const typeName = pokemon.types.map(
+        (type: Type) => type.name
+      )[0] as string;
+      switch (typeName) {
+        case 'Plante':
+          setCardClass('card-plant');
+          break;
+        case 'Poison':
+          setCardClass('card-poison');
+          break;
+        case 'Feu':
+          setCardClass('card-fire');
+          break;
+
+        case 'Eau':
+          setCardClass('card-water');
+          break;
+        case 'Vol':
+          setCardClass('card-flying');
+          break;
+        case 'Insecte':
+          setCardClass('card-bug');
+          break;
+        case 'Normal':
+          setCardClass('card-normal');
+          break;
+        case 'Electrik':
+          setCardClass('card-elect');
+          break;
+        case 'Fée':
+          setCardClass('card-fairy');
+          break;
+        case 'Combat':
+          setCardClass('card-fight');
+          break;
+        case 'Psy':
+          setCardClass('card-psychic');
+          break;
+        case 'Sol':
+          setCardClass('card-ground');
+          break;
+        case 'Roche':
+          setCardClass('card-rock');
+          break;
+        case 'Spectre':
+          setCardClass('card-ghost');
+          break;
+        case 'Dragon':
+          setCardClass('card-dragon');
+          break;
+        case 'Acier':
+          setCardClass('card-steel');
+          break;
+        case 'Glace':
+          setCardClass('card-ice');
+          break;
+        case 'Ténèbres':
+          setCardClass('card-dark');
+          break;
+        default:
+          setCardClass('card-default');
+      }
+    }
+  }, [pokemon]);
+
   return (
-    <div onClick={handleFlip} className={`card ${isFlipped ? 'flipped' : ''}`}>
+    <div
+      onClick={handleFlip}
+      className={`card ${cardClass} ${isFlipped ? 'flipped' : ''}`}>
       <div className="front">
         <div>
           {pokemon && (
