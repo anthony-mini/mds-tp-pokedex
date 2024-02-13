@@ -37,12 +37,17 @@ const Cards = () => {
       try {
         const data = await getPokemonById(id);
         setPokemon(data);
-        setIsShiny(false); // Réinitialisez isShiny à false chaque fois que le Pokémon change
+        setIsShiny(false);
       } catch (error) {
         console.error('Failed to fetch Pokemon:', error);
       }
     };
     fetchPokemon();
+
+    // Cleanup function to cancel the fetch request when the component is unmounted -> Utiliser le le strict mode pour éviter les fuites de mémoire;
+    return () => {
+      setPokemon(undefined);
+    };
   }, [id]);
 
   useEffect(() => {
@@ -158,14 +163,24 @@ const Cards = () => {
           )}
         </div>
       </div>
-      <div className="back">
+      <div className="back" onClick={handleFlip}>
         {pokemon && (
-          <div>
-            <img
-              className="pokeImg rounded-full"
-              src={pokemon.sprites?.regular}
-              alt={pokemon.name?.fr}
-            />
+          <div className="card-back-content">
+            <div className="stats">
+              {pokemon.stats &&
+                Object.entries(pokemon.stats).map(([key, value]) => (
+                  <div key={key} className="stat">
+                    <span className="stat-name">{key}</span>
+                    <span className="stat-value">{value}</span>
+                  </div>
+                ))}
+            </div>
+            <div className="info">
+              <div className="height-weight">
+                <span className="height">{pokemon.height}</span>
+                <span className="weight">{pokemon.weight}</span>
+              </div>
+            </div>
           </div>
         )}
       </div>
