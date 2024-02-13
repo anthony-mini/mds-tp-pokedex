@@ -6,6 +6,12 @@ import { Data } from '../../interfaces';
 const Cards = () => {
   const { id } = useParams();
   const [pokemon, setPokemon] = useState<Data>();
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
+
   useEffect(() => {
     const fetchPokemon = async () => {
       if (!id) return;
@@ -20,12 +26,27 @@ const Cards = () => {
   }, [id]);
 
   return (
-    <div>
-      {pokemon && (
+    <div onClick={handleFlip} className={`card ${isFlipped ? 'flipped' : ''}`}>
+      <div className="front">
         <div>
-          <h1>{pokemon.name?.fr}</h1>
+          {pokemon && (
+            <div>
+              <h1>{pokemon.name?.fr}</h1>
+            </div>
+          )}
         </div>
-      )}
+      </div>
+      <div className="back">
+        {pokemon && (
+          <div>
+            <img
+              className="pokeImg rounded-full"
+              src={pokemon.sprites?.regular}
+              alt={pokemon.name?.fr}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
