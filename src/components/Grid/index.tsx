@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Type, Talent, Data } from '../../interfaces';
 import SVGMemes from '../../assets/doge-hand-drawn.svg';
 
@@ -55,17 +56,23 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
               {data.map((pokemon) => (
                 <tr key={pokemon.pokedexId}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {pokemon.pokedexId}
+                    <Link to={`/pokemon/${pokemon.pokedexId}`}>
+                      {pokemon.pokedexId}
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <img
-                      className="h-20 w-20 rounded-full"
-                      src={pokemon.sprites?.regular}
-                      alt={pokemon.name?.fr}
-                    />
+                    <Link to={`/pokemon/${pokemon.pokedexId}`}>
+                      <img
+                        className="pokeImg rounded-full"
+                        src={pokemon.sprites?.regular}
+                        alt={pokemon.name?.fr}
+                      />
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {pokemon.name?.fr}
+                    <Link to={`/pokemon/${pokemon.pokedexId}`}>
+                      {pokemon.name?.fr}
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {pokemon.types &&
@@ -95,26 +102,26 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                           <table className="table-auto">
                             <tbody>
                               <tr>
-                                <td className="px-4 py-2 text-red-500 font-semibold	">
+                                <td className="px-4 py-2 text-red-500 font-semibold	text-sm	">
                                   HP:
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-sm	">
                                   {pokemon.stats?.hp}
                                 </td>
                               </tr>
                               <tr>
-                                <td className="px-4 py-2 text-green-500 font-semibold	">
+                                <td className="px-4 py-2 text-green-500 font-semibold	text-sm	">
                                   Attack:
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-sm	">
                                   {pokemon.stats?.atk}
                                 </td>
                               </tr>
                               <tr>
-                                <td className="px-4 py-2 text-blue-500 font-semibold	">
+                                <td className="px-4 py-2 text-blue-500 font-semibold text-sm		">
                                   Defense:
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-sm">
                                   {pokemon.stats?.def}
                                 </td>
                               </tr>
@@ -125,26 +132,26 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                           <table className="table-auto">
                             <tbody>
                               <tr>
-                                <td className="px-4 py-2 text-yellow-500 font-semibold">
+                                <td className="px-4 py-2 text-yellow-500 font-semibold text-sm	">
                                   Sp. Atk:
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-sm	">
                                   {pokemon.stats?.spe_atk}
                                 </td>
                               </tr>
                               <tr>
-                                <td className="px-4 py-2 text-indigo-500 font-semibold">
+                                <td className="px-4 py-2 text-indigo-500 font-semibold text-sm	">
                                   Sp. Def:
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-sm	">
                                   {pokemon.stats?.spe_def}
                                 </td>
                               </tr>
                               <tr>
-                                <td className="px-4 py-2 text-purple-500 font-semibold">
+                                <td className="px-4 py-2 text-purple-500 font-semibold text-sm	">
                                   Speed:
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-sm	">
                                   {pokemon.stats?.vit}
                                 </td>
                               </tr>

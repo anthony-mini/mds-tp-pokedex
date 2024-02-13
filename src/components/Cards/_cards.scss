@@ -1,0 +1,281 @@
+.card {
+  perspective: 1000px;
+  width: 300px;
+  height: 400px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  position: relative;
+  margin-top: 50px;
+}
+
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.front {
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.back {
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotateY(180deg);
+}
+
+.card.flipped .front {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .back {
+  transform: rotateY(0deg);
+}
+
+.card-header,
+.card-footer {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+}
+
+.card-header h1 {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.card-footer p {
+  margin: 0;
+}
+
+.card-plant {
+  background: linear-gradient(135deg, #8bc34a 0%, #689f38 100%);
+}
+
+.card-poison {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+}
+
+.card-fire {
+  background: linear-gradient(135deg, #ff5722 0%, #e64a19 100%);
+}
+
+.card-water {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+}
+
+.card-flying {
+  background: linear-gradient(135deg, #03a9f4 0%, #0288d1 100%);
+}
+
+.card-bug {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.card-normal {
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+}
+
+.card-elect {
+  background: linear-gradient(135deg, #ffeb3b 0%, #fbc02d 100%);
+}
+
+.card-fairy {
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+}
+
+.card-fight {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.card-psychic {
+  background: linear-gradient(135deg, #673ab7 0%, #512da8 100%);
+}
+
+.card-ground {
+  background: linear-gradient(135deg, #795548 0%, #5d4037 100%);
+}
+
+.card-rock {
+  background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);
+}
+
+.card-ghost {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+}
+
+.card-dragon {
+  background: linear-gradient(135deg, #3f51b5 0%, #303f9f 100%);
+}
+
+.card-steel {
+  background: linear-gradient(135deg, #757575 0%, #616161 100%);
+}
+
+.card-ice {
+  background: linear-gradient(135deg, #03a9f4 0%, #0288d1 100%);
+}
+
+.card-dark {
+  background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
+}
+
+.card-default {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+.card {
+  border: 10px solid #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+
+  .card-header {
+    font-family: 'Futura', sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    color: #151515;
+  }
+  .card-image {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; // Cela crée un aspect carré
+    overflow: hidden;
+    background-color: #f3f3f3;
+
+    .pokeImg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70%; // Ajustez selon vos besoins
+      height: auto;
+      transform: translate(-50%, -50%);
+      border: 5px solid white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+    }
+
+    .type-icon {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    background: rgba(255, 255, 255, 0.8);
+
+    .footer-icon {
+      font-size: 1.2em;
+    }
+  }
+}
+
+.hp-container {
+  display: flex;
+}
+.hp-icon {
+  width: 24px;
+  height: auto;
+}
+
+.shiny {
+  position: absolute;
+  width: 30px;
+  height: auto;
+  top: 25px;
+  right: 0px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+  object-fit: cover;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.card-back-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+}
+
+.pokeImg {
+  transition: transform 0.3s ease-in-out;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  background-color: #e0e0e0;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.height-weight,
+.catch-rate {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.weight,
+.height {
+  font-weight: 700;
+}
