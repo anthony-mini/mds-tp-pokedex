@@ -4,3 +4,4 @@ export { default as Select } from './Select';
 export { default as Grid } from './Grid';
 export { default as Pagination } from './Pagination';
 export { default as MultiSearchComponent } from './Multisearch';
+export { default as Cards } from './Cards';

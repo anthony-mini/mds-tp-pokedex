@@ -1,8 +1,12 @@
+import React from 'react';
+import { Header, Cards } from '../../components/index';
+
 const PokemonDetails = () => {
   return (
-    <div>
-      <h1>Pokemon Details</h1>
-    </div>
+    <React.Fragment>
+      <Header />
+      <Cards />
+    </React.Fragment>
   );
 };
 
