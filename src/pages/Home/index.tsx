@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Select, Grid, Pagination } from '../../components';
+import {
+  Header,
+  Select,
+  Grid,
+  Pagination,
+  MultiSearchComponent
+} from '../../components';
 import { getAllPokemon, getAllPokemonByGeneration } from '../../services';
-import { Data } from '../../interfaces';
+import { Data, Pokemon } from '../../interfaces';
 
 const selectGenNumber = [
   { value: '0', label: 'All' },
@@ -21,8 +27,9 @@ const Home: React.FC = () => {
   const [selectedGen, setSelectedGen] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 50;
-  const [search, setSearch] = useState('');
+  const itemsPerPage = 200;
+
+  const [selectedPokemons, setSelectedPokemons] = useState<Pokemon[]>([]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -54,19 +61,25 @@ const Home: React.FC = () => {
     setCurrentPage(1);
   };
 
+  const filteredData =
+    selectedPokemons.length > 0
+      ? currentData.filter((pokemon) =>
+          selectedPokemons.some(
+            (selectedPokemon) => selectedPokemon.pokedexId === pokemon.pokedexId
+          )
+        )
+      : currentData;
+
   return (
     <React.Fragment>
       <Header />
       <main className="mx-6">
         <section className="flex">
           <div className="action-list">
-            <div className="button">
-              {/* <Button text="Clear Filter" onClick={()} /> */}
-            </div>
+            <div className="button"></div>
           </div>
         </section>
         <section className="mb-6">
-          {/* TODO : Refacto (component)*/}
           <div className="pagination flex justify-end space-x-4 space-x-5 mb-6">
             <Select
               options={selectGenNumber}
@@ -85,35 +98,12 @@ const Home: React.FC = () => {
           ) : (
             <>
               <div className="flex ">
-                <input
-                  list="pokemon-names"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="p-2 m-2 border bg-gray-100 rounded-md w-[200px] focus:border-blue-500"
-                  placeholder="Search a pokemon ..."
+                <MultiSearchComponent
+                  setSelectedPokemons={setSelectedPokemons}
+                  selectedGen={selectedGen}
                 />
-                <datalist id="pokemon-names">
-                  {currentData.map(
-                    (pokemon) =>
-                      pokemon.name && (
-                        <option key={pokemon.pokedexId} value={pokemon.name.fr}>
-                          {pokemon.name.fr}
-                        </option>
-                      )
-                  )}
-                </datalist>
               </div>
-              {currentData && (
-                <Grid
-                  data={currentData.filter(
-                    (pokemon) =>
-                      pokemon.name &&
-                      pokemon.name.fr
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                  )}
-                />
-              )}
+              {filteredData && <Grid key={selectedGen} data={filteredData} />}
             </>
           )}
         </section>
