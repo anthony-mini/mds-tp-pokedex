@@ -16,11 +16,7 @@ const Cards = () => {
   };
 
   const onClickShiny = () => {
-    if (isShiny) {
-      setIsShiny(false);
-    } else if (!isShiny) {
-      setIsShiny(true);
-    }
+    setIsShiny(!isShiny);
   };
 
   useEffect(() => {
@@ -41,6 +37,7 @@ const Cards = () => {
       try {
         const data = await getPokemonById(id);
         setPokemon(data);
+        setIsShiny(false); // Réinitialisez isShiny à false chaque fois que le Pokémon change
       } catch (error) {
         console.error('Failed to fetch Pokemon:', error);
       }
