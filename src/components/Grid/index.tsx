@@ -64,7 +64,18 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {pokemon.types &&
-                      pokemon.types.map((type: Type) => type.name).join(', ')}
+                      pokemon.types.map((type: Type) => (
+                        <div
+                          key={type.name}
+                          className="flex items-center space-x-2">
+                          <img
+                            src={type.image}
+                            alt={type.name}
+                            className="w-5 h-5 rounded-full"
+                          />
+                          <span>{type.name}</span>
+                        </div>
+                      ))}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {pokemon.talents &&
