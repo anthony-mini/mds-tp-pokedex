@@ -75,7 +75,15 @@ interface Option {
   value: string;
   label: string;
 }
+export interface MultiSearch {
+  value: string;
+  label: string;
+}
 
+export interface Pokemon {
+  pokedexId: number;
+  name: Name;
+}
 export interface SelectProps {
   options: Option[];
   value: string;
