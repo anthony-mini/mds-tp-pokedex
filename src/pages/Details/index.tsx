@@ -5,7 +5,9 @@ const PokemonDetails = () => {
   return (
     <React.Fragment>
       <Header />
-      <Cards />
+      <section>
+        <Cards />
+      </section>
     </React.Fragment>
   );
 };

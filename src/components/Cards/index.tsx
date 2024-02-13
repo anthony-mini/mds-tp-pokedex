@@ -2,16 +2,38 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getPokemonById } from '../../services';
 import { Data, Type } from '../../interfaces';
+import { hpIcon, shiny } from '../../assets';
 
 const Cards = () => {
   const { id } = useParams();
   const [pokemon, setPokemon] = useState<Data>();
   const [isFlipped, setIsFlipped] = useState(false);
   const [cardClass, setCardClass] = useState('card-default');
+  const [isShiny, setIsShiny] = useState(false);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
+
+  const onClickShiny = () => {
+    if (isShiny) {
+      setIsShiny(false);
+    } else if (!isShiny) {
+      setIsShiny(true);
+    }
+  };
+
+  useEffect(() => {
+    const shinyElement = document.querySelector('.shiny');
+    if (!shinyElement) return;
+
+    const onClickChangeImg = () => setIsShiny((prevIsShiny) => !prevIsShiny);
+    shinyElement.addEventListener('click', onClickChangeImg);
+
+    return () => {
+      shinyElement.removeEventListener('click', onClickChangeImg);
+    };
+  }, [isShiny]);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -94,9 +116,7 @@ const Cards = () => {
   }, [pokemon]);
 
   return (
-    <div
-      onClick={handleFlip}
-      className={`card ${cardClass} ${isFlipped ? 'flipped' : ''}`}>
+    <div className={`card ${cardClass} ${isFlipped ? 'flipped' : ''}`}>
       <div className="front">
         <div>
           {pokemon && (
@@ -105,10 +125,18 @@ const Cards = () => {
                 <h1>{pokemon.name?.fr}</h1>
               </div>
               <div className="card-image">
+                {pokemon.sprites?.shiny ? (
+                  <button onClick={onClickShiny}>
+                    <img src={shiny} className="shiny" alt="shiny png" />
+                  </button>
+                ) : null}
                 <img
                   className="pokeImg rounded-full"
-                  src={pokemon.sprites?.regular}
+                  src={
+                    isShiny ? pokemon.sprites?.shiny : pokemon.sprites?.regular
+                  }
                   alt={pokemon.name?.fr}
+                  onClick={handleFlip}
                 />
               </div>
               <div className="card-footer">
@@ -122,6 +150,12 @@ const Cards = () => {
                       />
                     </div>
                   ))}
+                {pokemon.stats && (
+                  <div className="hp-container">
+                    <p className="hp">{pokemon.stats?.hp}</p>
+                    <img src={hpIcon} alt="Gotcha" className="hp-icon" />
+                  </div>
+                )}
               </div>
             </React.Fragment>
           )}
