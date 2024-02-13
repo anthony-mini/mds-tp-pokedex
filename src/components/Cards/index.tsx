@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getPokemonById } from '../../services';
-import { Data } from '../../interfaces';
+import { Data, Type } from '../../interfaces';
 
 const Cards = () => {
   const { id } = useParams();
@@ -30,9 +30,30 @@ const Cards = () => {
       <div className="front">
         <div>
           {pokemon && (
-            <div>
-              <h1>{pokemon.name?.fr}</h1>
-            </div>
+            <React.Fragment>
+              <div className="card-header">
+                <h1>{pokemon.name?.fr}</h1>
+              </div>
+              <div className="card-image">
+                <img
+                  className="pokeImg rounded-full"
+                  src={pokemon.sprites?.regular}
+                  alt={pokemon.name?.fr}
+                />
+              </div>
+              <div className="card-footer">
+                {pokemon.types &&
+                  pokemon.types.map((type: Type) => (
+                    <div key={type.name}>
+                      <img
+                        src={type.image}
+                        alt={type.name}
+                        className="footer-icon"
+                      />
+                    </div>
+                  ))}
+              </div>
+            </React.Fragment>
           )}
         </div>
       </div>
