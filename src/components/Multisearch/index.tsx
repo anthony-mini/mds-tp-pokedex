@@ -18,18 +18,16 @@ const MultiSearchComponent: React.FC<MultiSearchComponentProps> = ({
   selectedGen
 }) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-
   useEffect(() => {
     const fetchData = async () => {
       let response;
       if (selectedGen === '0') {
         response = await getAllPokemon();
       } else {
-        response = await getAllPokemon();
+        response = await getAllPokemonByGeneration(selectedGen);
       }
       setPokemons(response);
     };
-
     fetchData();
   }, [selectedGen]);
 

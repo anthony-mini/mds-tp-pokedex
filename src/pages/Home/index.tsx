@@ -61,6 +61,15 @@ const Home: React.FC = () => {
     setCurrentPage(1);
   };
 
+  const filteredData =
+    selectedPokemons.length > 0
+      ? currentData.filter((pokemon) =>
+          selectedPokemons.some(
+            (selectedPokemon) => selectedPokemon.pokedexId === pokemon.pokedexId
+          )
+        )
+      : currentData;
+
   return (
     <React.Fragment>
       <Header />
@@ -94,18 +103,7 @@ const Home: React.FC = () => {
                   selectedGen={selectedGen}
                 />
               </div>
-              {currentData && (
-                <Grid
-                  data={currentData.filter(
-                    (pokemon) =>
-                      selectedPokemons.length === 0 ||
-                      selectedPokemons.some(
-                        (selectedPokemon) =>
-                          selectedPokemon.pokedexId === pokemon.pokedexId
-                      )
-                  )}
-                />
-              )}
+              {filteredData && <Grid key={selectedGen} data={filteredData} />}
             </>
           )}
         </section>
