@@ -176,6 +176,7 @@ const Cards = () => {
                         {pokemon.evolution && (
                           <>
                             {pokemon.evolution.pre &&
+                              pokemon.evolution.pre.length > 0 &&
                               pokemon.evolution.pre.map(
                                 (evolution: Evolution) => (
                                   <div key={evolution.name}>
@@ -185,6 +186,7 @@ const Cards = () => {
                                 )
                               )}
                             {pokemon.evolution.next &&
+                              pokemon.evolution.next.length > 0 &&
                               pokemon.evolution.next.map(
                                 (evolution: Evolution) => (
                                   <div key={evolution.name}>
@@ -195,16 +197,19 @@ const Cards = () => {
                                   </div>
                                 )
                               )}
-                            {pokemon.evolution.mega && (
-                              <div>
-                                <p>
-                                  Méga évolution : {pokemon.evolution.mega.name}
-                                </p>
-                                <p>
-                                  Condition : {pokemon.evolution.mega.condition}
-                                </p>
-                              </div>
-                            )}
+                            {pokemon.evolution.mega &&
+                              pokemon.evolution.mega.name && (
+                                <div>
+                                  <p>
+                                    Méga évolution :{' '}
+                                    {pokemon.evolution.mega.name}
+                                  </p>
+                                  <p>
+                                    Condition :{' '}
+                                    {pokemon.evolution.mega.condition}
+                                  </p>
+                                </div>
+                              )}
                           </>
                         )}
                       </div>
