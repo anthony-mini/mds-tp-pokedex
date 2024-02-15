@@ -82,7 +82,7 @@ export interface MultiSearch {
 
 export interface Pokemon {
   pokedexId: number;
-  name: Name;
+  name?: Name;
 }
 export interface SelectProps {
   options: Option[];
@@ -92,7 +92,7 @@ export interface SelectProps {
 
 export interface MultiSearchComponentProps {
   setSelectedPokemons: (pokemons: Pokemon[]) => void;
-  selectedGen: string;
+  pokemons: Pokemon[] | Data[];
 }
 
 export interface PaginationProps {
