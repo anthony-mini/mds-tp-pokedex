@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getPokemonById } from '../../services';
 import { Data, Type, Evolution } from '../../interfaces';
-import { hpIcon, shiny } from '../../assets';
+import { hpIcon, shiny, EvolutionLogo } from '../../assets';
 import { PaginationCards } from '../index';
 
 const Cards = () => {
@@ -136,6 +136,9 @@ const Cards = () => {
                       <img src={shiny} className="shiny" alt="shiny png" />
                     </button>
                   ) : null}
+                  <button onClick={() => setShowPopup(true)}>
+                    <img src={EvolutionLogo} className="evol" alt="" />
+                  </button>
                   <img
                     className="pokeImg rounded-full"
                     src={
@@ -165,10 +168,6 @@ const Cards = () => {
                     </div>
                   )}
                   <div>
-                    <button onClick={() => setShowPopup(true)}>
-                      Afficher les évolutions
-                    </button>
-
                     {showPopup && (
                       <div className="popup">
                         <button onClick={() => setShowPopup(false)}>

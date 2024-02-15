@@ -222,6 +222,22 @@
   }
 }
 
+.evol {
+  position: absolute;
+  width: 30px;
+  height: auto;
+  top: 25px;
+  left: 23px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+  object-fit: cover;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 .card-back-content {
