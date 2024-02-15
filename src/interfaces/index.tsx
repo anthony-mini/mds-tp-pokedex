@@ -71,7 +71,7 @@ export interface Data {
   forme?: string | null;
 }
 
-interface Option {
+export interface Option {
   value: string;
   label: string;
 }
@@ -88,4 +88,13 @@ export interface SelectProps {
   options: Option[];
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export interface MultiSearchComponentProps {
+  setSelectedPokemons: (pokemons: Pokemon[]) => void;
+  selectedGen: string;
+}
+
+export interface PaginationProps {
+  currentId: number;
 }

@@ -5,3 +5,4 @@ export { default as Grid } from './Grid';
 export { default as Pagination } from './Pagination';
 export { default as MultiSearchComponent } from './Multisearch';
 export { default as Cards } from './Cards';
+export { default as PaginationCards } from './Cards/Pagination';
