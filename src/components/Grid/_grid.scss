@@ -78,7 +78,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 50px;
 }
 
 .pokemonContainer {
@@ -192,6 +191,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  z-index: 20;
 }
 
 .pokemonType {
