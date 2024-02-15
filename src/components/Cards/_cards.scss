@@ -279,3 +279,41 @@
 .height {
   font-weight: 700;
 }
+
+.popup {
+  position: fixed;
+  width: 85%;
+  max-width: 500px;
+  height: 65%;
+  background-color: #f9f9f9;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  overflow: auto;
+}
+
+.popup button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #151515;
+}
+
+.popup div {
+  margin-bottom: 10px;
+}
+
+.popup p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  color: #333;
+}

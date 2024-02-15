@@ -118,6 +118,8 @@ const Cards = () => {
     }
   }, [pokemon]);
 
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <>
       <div className={`card ${cardClass} ${isFlipped ? 'flipped' : ''}`}>
@@ -163,33 +165,50 @@ const Cards = () => {
                     </div>
                   )}
                   <div>
-                    {pokemon.evolution && (
-                      <>
-                        {pokemon.evolution.pre &&
-                          pokemon.evolution.pre.map((evolution: Evolution) => (
-                            <div key={evolution.name}>
-                              <p>Pré-évolution : {evolution.name}</p>
-                              <p>Condition : {evolution.condition}</p>
-                            </div>
-                          ))}
-                        {pokemon.evolution.next &&
-                          pokemon.evolution.next.map((evolution: Evolution) => (
-                            <div key={evolution.name}>
-                              <p>Prochaine évolution : {evolution.name}</p>
-                              <p>Condition : {evolution.condition}</p>
-                            </div>
-                          ))}
-                        {pokemon.evolution.mega && (
-                          <div>
-                            <p>
-                              Méga évolution : {pokemon.evolution.mega.name}
-                            </p>
-                            <p>
-                              Condition : {pokemon.evolution.mega.condition}
-                            </p>
-                          </div>
+                    <button onClick={() => setShowPopup(true)}>
+                      Afficher les évolutions
+                    </button>
+
+                    {showPopup && (
+                      <div className="popup">
+                        <button onClick={() => setShowPopup(false)}>
+                          Fermer
+                        </button>
+                        {pokemon.evolution && (
+                          <>
+                            {pokemon.evolution.pre &&
+                              pokemon.evolution.pre.map(
+                                (evolution: Evolution) => (
+                                  <div key={evolution.name}>
+                                    <p>Pré-évolution : {evolution.name}</p>
+                                    <p>Condition : {evolution.condition}</p>
+                                  </div>
+                                )
+                              )}
+                            {pokemon.evolution.next &&
+                              pokemon.evolution.next.map(
+                                (evolution: Evolution) => (
+                                  <div key={evolution.name}>
+                                    <p>
+                                      Prochaine évolution : {evolution.name}
+                                    </p>
+                                    <p>Condition : {evolution.condition}</p>
+                                  </div>
+                                )
+                              )}
+                            {pokemon.evolution.mega && (
+                              <div>
+                                <p>
+                                  Méga évolution : {pokemon.evolution.mega.name}
+                                </p>
+                                <p>
+                                  Condition : {pokemon.evolution.mega.condition}
+                                </p>
+                              </div>
+                            )}
+                          </>
                         )}
-                      </>
+                      </div>
                     )}
                   </div>
                 </div>
