@@ -41,8 +41,8 @@ export interface Evolution {
 }
 
 export interface EvolutionChain {
-  pre: Evolution | null;
-  next: Evolution[];
+  pre: Evolution[] | null;
+  next: Evolution[] | null;
   mega: Evolution | null;
 }
 
