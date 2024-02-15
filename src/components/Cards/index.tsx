@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getPokemonById } from '../../services';
-import { Data, Type } from '../../interfaces';
-import { hpIcon, shiny } from '../../assets';
+import { Data, Type, Evolution } from '../../interfaces';
+import { hpIcon, shiny, EvolutionLogo } from '../../assets';
+import { PaginationCards } from '../index';
 
 const Cards = () => {
   const { id } = useParams();
@@ -117,74 +118,132 @@ const Cards = () => {
     }
   }, [pokemon]);
 
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
-    <div className={`card ${cardClass} ${isFlipped ? 'flipped' : ''}`}>
-      <div className="front">
-        <div>
-          {pokemon && (
-            <React.Fragment>
-              <div className="card-header">
-                <h1>{pokemon.name?.fr}</h1>
-              </div>
-              <div className="card-image">
-                {pokemon.sprites?.shiny ? (
-                  <button onClick={onClickShiny}>
-                    <img src={shiny} className="shiny" alt="shiny png" />
+    <>
+      <div className={`card ${cardClass} ${isFlipped ? 'flipped' : ''}`}>
+        <div className="front">
+          <div>
+            {pokemon && (
+              <React.Fragment>
+                <div className="card-header">
+                  <h1>{pokemon.name?.fr}</h1>
+                </div>
+                <div className="card-image">
+                  {pokemon.sprites?.shiny ? (
+                    <button onClick={onClickShiny}>
+                      <img src={shiny} className="shiny" alt="shiny png" />
+                    </button>
+                  ) : null}
+                  <button onClick={() => setShowPopup(true)}>
+                    <img src={EvolutionLogo} className="evol" alt="" />
                   </button>
-                ) : null}
-                <img
-                  className="pokeImg rounded-full"
-                  src={
-                    isShiny ? pokemon.sprites?.shiny : pokemon.sprites?.regular
-                  }
-                  alt={pokemon.name?.fr}
-                  onClick={handleFlip}
-                />
-              </div>
-              <div className="card-footer">
-                {pokemon.types &&
-                  pokemon.types.map((type: Type) => (
-                    <div key={type.name}>
-                      <img
-                        src={type.image}
-                        alt={type.name}
-                        className="footer-icon"
-                      />
+                  <img
+                    className="pokeImg rounded-full"
+                    src={
+                      isShiny
+                        ? pokemon.sprites?.shiny
+                        : pokemon.sprites?.regular
+                    }
+                    alt={pokemon.name?.fr}
+                    onClick={handleFlip}
+                  />
+                </div>
+                <div className="card-footer">
+                  {pokemon.types &&
+                    pokemon.types.map((type: Type) => (
+                      <div key={type.name}>
+                        <img
+                          src={type.image}
+                          alt={type.name}
+                          className="footer-icon"
+                        />
+                      </div>
+                    ))}
+                  {pokemon.stats && (
+                    <div className="hp-container">
+                      <p className="hp">{pokemon.stats?.hp}</p>
+                      <img src={hpIcon} alt="Gotcha" className="hp-icon" />
+                    </div>
+                  )}
+                  <div>
+                    {showPopup && (
+                      <div className="popup">
+                        <button onClick={() => setShowPopup(false)}>
+                          Fermer
+                        </button>
+                        {pokemon.evolution && (
+                          <>
+                            {pokemon.evolution.pre &&
+                              pokemon.evolution.pre.length > 0 &&
+                              pokemon.evolution.pre.map(
+                                (evolution: Evolution) => (
+                                  <div key={evolution.name}>
+                                    <p>Pré-évolution : {evolution.name}</p>
+                                    <p>Condition : {evolution.condition}</p>
+                                  </div>
+                                )
+                              )}
+                            {pokemon.evolution.next &&
+                              pokemon.evolution.next.length > 0 &&
+                              pokemon.evolution.next.map(
+                                (evolution: Evolution) => (
+                                  <div key={evolution.name}>
+                                    <p>
+                                      Prochaine évolution : {evolution.name}
+                                    </p>
+                                    <p>Condition : {evolution.condition}</p>
+                                  </div>
+                                )
+                              )}
+                            {pokemon.evolution.mega &&
+                              pokemon.evolution.mega.name && (
+                                <div>
+                                  <p>
+                                    Méga évolution :{' '}
+                                    {pokemon.evolution.mega.name}
+                                  </p>
+                                  <p>
+                                    Condition :{' '}
+                                    {pokemon.evolution.mega.condition}
+                                  </p>
+                                </div>
+                              )}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </React.Fragment>
+            )}
+          </div>
+        </div>
+        <div className="back" onClick={handleFlip}>
+          {pokemon && (
+            <div className="card-back-content">
+              <div className="stats">
+                {pokemon.stats &&
+                  Object.entries(pokemon.stats).map(([key, value]) => (
+                    <div key={key} className="stat">
+                      <span className="stat-name">{key}</span>
+                      <span className="stat-value">{value}</span>
                     </div>
                   ))}
-                {pokemon.stats && (
-                  <div className="hp-container">
-                    <p className="hp">{pokemon.stats?.hp}</p>
-                    <img src={hpIcon} alt="Gotcha" className="hp-icon" />
-                  </div>
-                )}
               </div>
-            </React.Fragment>
+              <div className="info">
+                <div className="height-weight">
+                  <span className="height">{pokemon.height}</span>
+                  <span className="weight">{pokemon.weight}</span>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </div>
-      <div className="back" onClick={handleFlip}>
-        {pokemon && (
-          <div className="card-back-content">
-            <div className="stats">
-              {pokemon.stats &&
-                Object.entries(pokemon.stats).map(([key, value]) => (
-                  <div key={key} className="stat">
-                    <span className="stat-name">{key}</span>
-                    <span className="stat-value">{value}</span>
-                  </div>
-                ))}
-            </div>
-            <div className="info">
-              <div className="height-weight">
-                <span className="height">{pokemon.height}</span>
-                <span className="weight">{pokemon.weight}</span>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      <PaginationCards currentId={Number(id)} />
+    </>
   );
 };
 

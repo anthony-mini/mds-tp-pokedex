@@ -41,8 +41,8 @@ export interface Evolution {
 }
 
 export interface EvolutionChain {
-  pre: Evolution | null;
-  next: Evolution[];
+  pre: Evolution[] | null;
+  next: Evolution[] | null;
   mega: Evolution | null;
 }
 
@@ -71,7 +71,7 @@ export interface Data {
   forme?: string | null;
 }
 
-interface Option {
+export interface Option {
   value: string;
   label: string;
 }
@@ -82,10 +82,19 @@ export interface MultiSearch {
 
 export interface Pokemon {
   pokedexId: number;
-  name: Name;
+  name?: Name;
 }
 export interface SelectProps {
   options: Option[];
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export interface MultiSearchComponentProps {
+  setSelectedPokemons: (pokemons: Pokemon[]) => void;
+  pokemons: Pokemon[] | Data[];
+}
+
+export interface PaginationProps {
+  currentId: number;
 }
