@@ -1,0 +1,51 @@
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 80px;
+}
+
+.circle-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: #f3f3f3;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+.circle-block img {
+  width: 35px;
+  height: 35px;
+}
+
+.circle-block:first-child img {
+  transform: rotate(270deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(270deg) scale(1.1);
+  }
+}
+
+.circle-block:last-child img {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(90deg) scale(1.1);
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

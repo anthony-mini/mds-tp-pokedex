@@ -94,3 +94,7 @@ export interface MultiSearchComponentProps {
   setSelectedPokemons: (pokemons: Pokemon[]) => void;
   selectedGen: string;
 }
+
+export interface PaginationProps {
+  currentId: number;
+}

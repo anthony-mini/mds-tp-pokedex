@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Select from 'react-select';
+import Select, { Options } from 'react-select';
 import { getAllPokemonByGeneration, getAllPokemon } from '../../services/index';
 import { Pokemon } from '../../interfaces/index';
 import { Option, MultiSearchComponentProps } from '../../interfaces/index';
@@ -27,9 +27,9 @@ const MultiSearchComponent: React.FC<MultiSearchComponentProps> = ({
         value: pokemon.pokedexId.toString(),
         label: pokemon.name?.fr
       }))
-    : [];
+    : [pokemons];
 
-  const handleChange = (selectedOptions: Option[] | null) => {
+  const handleChange = (selectedOptions: Options<Option> | null) => {
     if (selectedOptions) {
       const selectedPokemons = pokemons.filter((pokemon) =>
         selectedOptions.some(
