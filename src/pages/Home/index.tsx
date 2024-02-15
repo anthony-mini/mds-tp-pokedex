@@ -27,7 +27,7 @@ const Home: React.FC = () => {
   const [selectedGen, setSelectedGen] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 200;
+  const itemsPerPage = 50;
 
   const [selectedPokemons, setSelectedPokemons] = useState<Pokemon[]>([]);
 
@@ -80,29 +80,28 @@ const Home: React.FC = () => {
           </div>
         </section>
         <section className="mb-6">
-          <div className="pagination flex justify-end space-x-4 space-x-5 mb-6">
-            <Select
-              options={selectGenNumber}
-              value={selectedGen}
-              onChange={handleSelectChange}
-            />
+          <div className="pagination-grid">
+            <div className="pagination-bloc-2 flex">
+              <MultiSearchComponent
+                setSelectedPokemons={setSelectedPokemons}
+                pokemons={selectedGen === '0' ? currentData : currentData}
+              />
+              <Select
+                options={selectGenNumber}
+                value={selectedGen}
+                onChange={handleSelectChange}
+              />
+            </div>
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
               onPageChange={setCurrentPage}
             />
-            <div className="animate-spin-slow h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
           </div>
           {isLoading ? (
             <div className="animate-spin-slow h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
           ) : (
             <>
-              <div className="flex ">
-                <MultiSearchComponent
-                  setSelectedPokemons={setSelectedPokemons}
-                  selectedGen={selectedGen}
-                />
-              </div>
               {filteredData && <Grid key={selectedGen} data={filteredData} />}
             </>
           )}

@@ -1,47 +1,38 @@
-import { useState, useEffect } from 'react';
 import Select, { Options } from 'react-select';
-import { getAllPokemonByGeneration, getAllPokemon } from '../../services/index';
-import { Pokemon } from '../../interfaces/index';
-import { Option, MultiSearchComponentProps } from '../../interfaces/index';
+import { Option } from '../../interfaces/index';
+import { MultiSearchComponentProps } from '../../interfaces/index';
 
+// Définition du composant MultiSearchComponent
 const MultiSearchComponent: React.FC<MultiSearchComponentProps> = ({
   setSelectedPokemons,
-  selectedGen
+  pokemons
 }) => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      let response;
-      if (selectedGen === '0') {
-        response = await getAllPokemon();
-      } else {
-        response = await getAllPokemonByGeneration(selectedGen);
-      }
-      setPokemons(response);
-    };
-    fetchData();
-  }, [selectedGen]);
-
+  // Génération des options pour le composant Select
   const options: Option[] = Array.isArray(pokemons)
     ? pokemons.map((pokemon) => ({
         value: pokemon.pokedexId.toString(),
-        label: pokemon.name?.fr
+        label: pokemon.name?.fr || 'missing name'
       }))
     : [pokemons];
 
+  // Fonction pour gérer le changement de sélection
   const handleChange = (selectedOptions: Options<Option> | null) => {
     if (selectedOptions) {
+      // Filtrage des pokemons en fonction de la sélection de l'utilisateur
       const selectedPokemons = pokemons.filter((pokemon) =>
         selectedOptions.some(
           (option) => option.value === pokemon.pokedexId.toString()
         )
       );
+      // Mise à jour de l'état selectedPokemons
       setSelectedPokemons(selectedPokemons);
     } else {
+      // Réinitialisation de l'état selectedPokemons si l'utilisateur a supprimé toutes les sélections
       setSelectedPokemons([]);
     }
   };
 
+  // Rendu du composant Select
   return (
     <Select
       isMulti
