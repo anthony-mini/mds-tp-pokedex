@@ -1,5 +1,6 @@
 // Pagination.tsx
 import React from 'react';
+import { Arrow } from '../../assets';
 
 interface PaginationProps {
   totalPages: number;
@@ -7,7 +8,11 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({
+  totalPages,
+  currentPage,
+  onPageChange
+}) => {
   const handleNextPageClick = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
@@ -27,19 +32,15 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPage
   const count = `${currentPage} / ${totalPages}`;
 
   return (
-    <div className="flex justify-between items-center bg-white py-2 px-4 rounded">
-      <button
-        onClick={handlePreviousPageClick}
-        className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:bg-blue-600">
-        Page précédente
+    <div className="flex justify-between items-center">
+      <button onClick={handlePreviousPageClick} className="pagination-grid">
+        <img src={Arrow} alt="" />
       </button>
 
-      <span className="text-sm px-4">{count}</span>
+      <span className="count">{count}</span>
 
-      <button
-        onClick={handleNextPageClick}
-        className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:bg-blue-600">
-        Page suivante
+      <button onClick={handleNextPageClick} className="pagination-grid">
+        <img src={Arrow} alt="" />
       </button>
     </div>
   );
