@@ -2,16 +2,7 @@ import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { getAllPokemonByGeneration, getAllPokemon } from '../../services/index';
 import { Pokemon } from '../../interfaces/index';
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface MultiSearchComponentProps {
-  setSelectedPokemons: (pokemons: Pokemon[]) => void;
-  selectedGen: string;
-}
+import { Option, MultiSearchComponentProps } from '../../interfaces/index';
 
 const MultiSearchComponent: React.FC<MultiSearchComponentProps> = ({
   setSelectedPokemons,
