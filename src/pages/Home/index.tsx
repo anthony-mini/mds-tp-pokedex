@@ -103,6 +103,13 @@ const Home: React.FC = () => {
           ) : (
             <>
               {filteredData && <Grid key={selectedGen} data={filteredData} />}
+              <div className="flex place-content-evenly">
+                <Pagination
+                  totalPages={totalPages}
+                  currentPage={currentPage}
+                  onPageChange={setCurrentPage}
+                />
+              </div>
             </>
           )}
         </section>

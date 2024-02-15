@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getPokemonById } from '../../services';
-import { Data, Type } from '../../interfaces';
-import { hpIcon, shiny } from '../../assets';
+import { Data, Type, Evolution } from '../../interfaces';
+import { hpIcon, shiny, EvolutionLogo } from '../../assets';
 import { PaginationCards } from '../index';
 
 const Cards = () => {
@@ -118,6 +118,8 @@ const Cards = () => {
     }
   }, [pokemon]);
 
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <>
       <div className={`card ${cardClass} ${isFlipped ? 'flipped' : ''}`}>
@@ -134,6 +136,9 @@ const Cards = () => {
                       <img src={shiny} className="shiny" alt="shiny png" />
                     </button>
                   ) : null}
+                  <button onClick={() => setShowPopup(true)}>
+                    <img src={EvolutionLogo} className="evol" alt="" />
+                  </button>
                   <img
                     className="pokeImg rounded-full"
                     src={
@@ -162,6 +167,54 @@ const Cards = () => {
                       <img src={hpIcon} alt="Gotcha" className="hp-icon" />
                     </div>
                   )}
+                  <div>
+                    {showPopup && (
+                      <div className="popup">
+                        <button onClick={() => setShowPopup(false)}>
+                          Fermer
+                        </button>
+                        {pokemon.evolution && (
+                          <>
+                            {pokemon.evolution.pre &&
+                              pokemon.evolution.pre.length > 0 &&
+                              pokemon.evolution.pre.map(
+                                (evolution: Evolution) => (
+                                  <div key={evolution.name}>
+                                    <p>Pré-évolution : {evolution.name}</p>
+                                    <p>Condition : {evolution.condition}</p>
+                                  </div>
+                                )
+                              )}
+                            {pokemon.evolution.next &&
+                              pokemon.evolution.next.length > 0 &&
+                              pokemon.evolution.next.map(
+                                (evolution: Evolution) => (
+                                  <div key={evolution.name}>
+                                    <p>
+                                      Prochaine évolution : {evolution.name}
+                                    </p>
+                                    <p>Condition : {evolution.condition}</p>
+                                  </div>
+                                )
+                              )}
+                            {pokemon.evolution.mega &&
+                              pokemon.evolution.mega.name && (
+                                <div>
+                                  <p>
+                                    Méga évolution :{' '}
+                                    {pokemon.evolution.mega.name}
+                                  </p>
+                                  <p>
+                                    Condition :{' '}
+                                    {pokemon.evolution.mega.condition}
+                                  </p>
+                                </div>
+                              )}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </React.Fragment>
             )}
