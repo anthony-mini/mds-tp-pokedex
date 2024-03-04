@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Type, Talent, Data } from '../../interfaces';
 import SVGMemes from '../../assets/doge-hand-drawn.svg';
+import PokeballBg from '../../assets/poke-bg.svg';
 
 const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
   return (
@@ -83,12 +84,12 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                   <div className="pokemonHeader">
                     <span className="pokemonName">{pokemon.name?.fr}</span>
                   </div>
+                  <img src={PokeballBg} alt="" className="card-background" />{' '}
                   <img
                     className="pokemonImage"
                     src={pokemon.sprites?.regular}
                     alt={pokemon.name?.fr}
                   />
-
                   <div className="pokemonBody">
                     <div className="pokemonTalents">
                       {pokemon.talents &&
