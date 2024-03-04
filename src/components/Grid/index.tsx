@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Type, Talent, Data } from '../../interfaces';
 import SVGMemes from '../../assets/doge-hand-drawn.svg';
+import PokeballBg from '../../assets/poke-bg.svg';
 
 const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
   return (
@@ -77,20 +78,18 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
           }
 
           return (
-            <>
-              <Link to={`/pokemon/${pokemon.pokedexId}`}>
-                <div
-                  key={pokemon.pokedexId}
-                  className={`pokemonContainer ${cardClass}`}>
+            <React.Fragment key={pokemon.pokedex_id}>
+              <Link to={`/pokemon/${pokemon.pokedex_id}`}>
+                <div className={`pokemonContainer ${cardClass}`}>
                   <div className="pokemonHeader">
                     <span className="pokemonName">{pokemon.name?.fr}</span>
                   </div>
+                  <img src={PokeballBg} alt="" className="card-background" />{' '}
                   <img
                     className="pokemonImage"
                     src={pokemon.sprites?.regular}
                     alt={pokemon.name?.fr}
                   />
-
                   <div className="pokemonBody">
                     <div className="pokemonTalents">
                       {pokemon.talents &&
@@ -113,7 +112,7 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                   </div>
                 </div>
               </Link>
-            </>
+            </React.Fragment>
           );
         })
       )}

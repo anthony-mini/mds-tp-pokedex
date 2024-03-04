@@ -10,7 +10,7 @@ const MultiSearchComponent: React.FC<MultiSearchComponentProps> = ({
   // Génération des options pour le composant Select
   const options: Option[] = Array.isArray(pokemons)
     ? pokemons.map((pokemon) => ({
-        value: pokemon.pokedexId.toString(),
+        value: pokemon.pokedex_id,
         label: pokemon.name?.fr || 'missing name'
       }))
     : [pokemons];
@@ -20,9 +20,7 @@ const MultiSearchComponent: React.FC<MultiSearchComponentProps> = ({
     if (selectedOptions) {
       // Filtrage des pokemons en fonction de la sélection de l'utilisateur
       const selectedPokemons = pokemons.filter((pokemon) =>
-        selectedOptions.some(
-          (option) => option.value === pokemon.pokedexId.toString()
-        )
+        selectedOptions.some((option) => option.value === pokemon.pokedex_id)
       );
       // Mise à jour de l'état selectedPokemons
       setSelectedPokemons(selectedPokemons);

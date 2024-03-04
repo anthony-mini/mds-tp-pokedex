@@ -215,3 +215,12 @@
   transform: scale(1.5);
   transition: transform 0.3s ease-in-out;
 }
+
+.card-background {
+  position: absolute;
+  bottom: -80px;
+  left: -70px;
+  width: 150px;
+  height: 150px;
+  z-index: -10;
+}

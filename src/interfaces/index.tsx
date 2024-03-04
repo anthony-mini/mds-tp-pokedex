@@ -35,7 +35,7 @@ export interface Resistance {
 }
 
 export interface Evolution {
-  pokedexId: number;
+  pokedex_id: number;
   name: string;
   condition: string;
 }
@@ -52,7 +52,7 @@ export interface Sexe {
 }
 
 export interface Data {
-  pokedexId: number;
+  pokedex_id: number;
   generation?: number;
   category?: string;
   name?: Name;
@@ -72,7 +72,7 @@ export interface Data {
 }
 
 export interface Option {
-  value: string;
+  value: number;
   label: string;
 }
 export interface MultiSearch {
@@ -81,7 +81,7 @@ export interface MultiSearch {
 }
 
 export interface Pokemon {
-  pokedexId: number;
+  pokedex_id: number;
   name?: Name;
 }
 export interface SelectProps {
