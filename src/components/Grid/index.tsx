@@ -77,11 +77,9 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
           }
 
           return (
-            <>
-              <Link to={`/pokemon/${pokemon.pokedexId}`}>
-                <div
-                  key={pokemon.pokedexId}
-                  className={`pokemonContainer ${cardClass}`}>
+            <React.Fragment key={pokemon.pokedex_id}>
+              <Link to={`/pokemon/${pokemon.pokedex_id}`}>
+                <div className={`pokemonContainer ${cardClass}`}>
                   <div className="pokemonHeader">
                     <span className="pokemonName">{pokemon.name?.fr}</span>
                   </div>
@@ -113,7 +111,7 @@ const Grid: React.FC<{ data: Data[] }> = ({ data }) => {
                   </div>
                 </div>
               </Link>
-            </>
+            </React.Fragment>
           );
         })
       )}
