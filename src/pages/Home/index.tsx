@@ -75,14 +75,9 @@ const Home: React.FC = () => {
     <React.Fragment>
       <Header />
       <main className="mx-6">
-        <section className="flex">
-          <div className="action-list">
-            <div className="button"></div>
-          </div>
-        </section>
         <section className="mb-6">
           <div className="pagination-grid">
-            <div className="pagination-bloc-2 flex">
+            <div className="pagination-bloc-2 flex flex-wrap justify-center">
               <MultiSearchComponent
                 setSelectedPokemons={setSelectedPokemons}
                 pokemons={selectedGen === '0' ? currentData : currentData}

@@ -18,7 +18,7 @@
 }
 
 .basic-multi-select {
-  width: 400px;
+  width: 100%;
   margin: 20px 0px 20px 0px;
 }
 
@@ -55,11 +55,15 @@
 
 .pagination-grid {
   display: flex;
-  flex-wrap: wrap;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  justify-items: center;
   align-items: center;
-  justify-content: center;
+  padding: 10px;
+  background-color: #f3f3f3;
+  justify-content: space-between;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .select {
@@ -68,4 +72,21 @@
   height: 38px;
   border: 1px solid #cccccc;
   border-radius: 8%;
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  // Styles pour les tablettes
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // Styles pour les mobiles
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 }
