@@ -82,7 +82,7 @@ const Home: React.FC = () => {
         </section>
         <section className="mb-6">
           <div className="pagination-grid">
-            <div className="pagination-bloc-2 flex">
+            <div className="pagination-bloc-2 flex flex-wrap justify-center">
               <MultiSearchComponent
                 setSelectedPokemons={setSelectedPokemons}
                 pokemons={selectedGen === '0' ? currentData : currentData}
