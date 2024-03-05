@@ -80,20 +80,6 @@
   justify-content: center;
 }
 
-.pokemonContainer {
-  perspective: 1000px;
-  width: 300px;
-  height: 400px;
-  position: relative;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  position: relative;
-  margin: 20px;
-}
-
 .pokemonLink {
   text-decoration: none;
   color: black;
@@ -104,16 +90,18 @@
   margin: 0;
   text-transform: uppercase;
   font-weight: 600;
-}
 
-.pokemonTypes,
-.pokemonTalents,
-.pokemonStats {
-  margin-top: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  @media (max-width: 480px) {
+    font-size: 0.9em;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.8em;
+  }
+
+  @media (max-width: 280px) {
+    font-size: 0.7em;
+  }
 }
 
 .pokemonType {
@@ -125,6 +113,11 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
+
+  @media (max-width: 768px) {
+    width: 15px;
+    height: 15px;
+  }
 }
 
 .statsContainer {
@@ -134,8 +127,8 @@
 
 .pokemonContainer {
   perspective: 1000px;
-  width: 250px;
-  height: 350px;
+  width: 220px;
+  height: 320px;
   position: relative;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -148,6 +141,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 1024px) {
+    width: 220px;
+    height: 320px;
+  }
+
+  @media (max-width: 768px) {
+    width: 140px;
+    height: 190px;
+  }
+
+  @media (max-width: 480px) {
+    width: 140px;
+    height: 190px;
+    margin: 5px;
+  }
 }
 
 .pokemonHeader {
@@ -161,10 +170,24 @@
 }
 
 .pokemonImage {
-  width: 180px;
-  height: 180px;
+  width: 170px;
+  height: 170px;
   z-index: 10;
+  position: absolute;
+  top: 35px;
   border-radius: 0%;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: auto;
+    top: 30px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+    height: auto;
+    top: 35px;
+  }
 }
 
 .pokemonBody {
@@ -192,6 +215,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   z-index: 20;
+
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
+}
+
+.pokemonTalents {
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .pokemonType {
@@ -223,4 +256,18 @@
   width: 150px;
   height: 150px;
   z-index: -10;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+    bottom: -60px;
+    left: -50px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+    height: 100px;
+    bottom: -40px;
+    left: -30px;
+  }
 }
