@@ -86,21 +86,21 @@
 }
 
 .pokemonName {
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 0;
   text-transform: uppercase;
   font-weight: 600;
 
   @media (max-width: 480px) {
-    font-size: 0.9em;
-  }
-
-  @media (max-width: 320px) {
     font-size: 0.8em;
   }
 
+  @media (max-width: 320px) {
+    font-size: 0.6em;
+  }
+
   @media (max-width: 280px) {
-    font-size: 0.7em;
+    font-size: 0.5em;
   }
 }
 

@@ -24,10 +24,10 @@ header {
   width: 200px;
   height: auto;
   @media (max-width: 1024px) {
-    width: 140px;
+    width: 180px;
   }
 
   @media (max-width: 768px) {
-    width: 180px;
+    width: 140px;
   }
 }
