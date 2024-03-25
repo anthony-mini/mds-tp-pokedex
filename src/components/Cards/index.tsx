@@ -16,6 +16,15 @@ const Cards = () => {
   const handleClickCatched = () => {
     pokemon && setItem(String(pokemon.pokedex_id), pokemon);
     setIsClicked(true);
+
+    if (pokemon?.pokedex_id === 25) {
+      const audio = new Audio('/vine-who-is-that-pokemon-its-pikachu.mp3');
+      audio.play();
+    } else {
+      const audio = new Audio('/06-caught-a-pokemon.mp3');
+      audio.play();
+    }
+
     setTimeout(() => setIsClicked(false), 1000);
   };
 
