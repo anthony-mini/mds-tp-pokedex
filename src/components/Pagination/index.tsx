@@ -32,7 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const count = `${currentPage} / ${totalPages}`;
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-center items-center">
       <button onClick={handlePreviousPageClick} className="pagination-grid">
         <img src={Arrow} alt="" />
       </button>

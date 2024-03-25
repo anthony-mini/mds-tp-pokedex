@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { getPokemonById } from '../../services';
+import { getPokemonById, setItem } from '../../services';
 import { Data, Type, Evolution } from '../../interfaces';
 import { hpIcon, shiny, EvolutionLogo } from '../../assets';
 import { PaginationCards } from '../index';
@@ -11,6 +11,13 @@ const Cards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [cardClass, setCardClass] = useState('card-default');
   const [isShiny, setIsShiny] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClickCatched = () => {
+    pokemon && setItem(String(pokemon.pokedex_id), pokemon);
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 1000);
+  };
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -151,16 +158,18 @@ const Cards = () => {
                   />
                 </div>
                 <div className="card-footer">
-                  {pokemon.types &&
-                    pokemon.types.map((type: Type) => (
-                      <div key={type.name}>
-                        <img
-                          src={type.image}
-                          alt={type.name}
-                          className="footer-icon"
-                        />
-                      </div>
-                    ))}
+                  <div className="bloc-type">
+                    {pokemon.types &&
+                      pokemon.types.map((type: Type) => (
+                        <div key={type.name}>
+                          <img
+                            src={type.image}
+                            alt={type.name}
+                            className="footer-icon"
+                          />
+                        </div>
+                      ))}
+                  </div>
                   {pokemon.stats && (
                     <div className="hp-container">
                       <p className="hp">{pokemon.stats?.hp}</p>
@@ -173,45 +182,47 @@ const Cards = () => {
                         <button onClick={() => setShowPopup(false)}>
                           Fermer
                         </button>
-                        {pokemon.evolution && (
-                          <>
-                            {pokemon.evolution.pre &&
-                              pokemon.evolution.pre.length > 0 &&
-                              pokemon.evolution.pre.map(
-                                (evolution: Evolution) => (
-                                  <div key={evolution.name}>
-                                    <p>Pré-évolution : {evolution.name}</p>
-                                    <p>Condition : {evolution.condition}</p>
-                                  </div>
-                                )
-                              )}
-                            {pokemon.evolution.next &&
-                              pokemon.evolution.next.length > 0 &&
-                              pokemon.evolution.next.map(
-                                (evolution: Evolution) => (
-                                  <div key={evolution.name}>
+                        <div className="bloc-text-evol">
+                          {pokemon.evolution && (
+                            <>
+                              {pokemon.evolution.pre &&
+                                pokemon.evolution.pre.length > 0 &&
+                                pokemon.evolution.pre.map(
+                                  (evolution: Evolution) => (
+                                    <div key={evolution.name}>
+                                      <p>Pré-évolution : {evolution.name}</p>
+                                      <p>Condition : {evolution.condition}</p>
+                                    </div>
+                                  )
+                                )}
+                              {pokemon.evolution.next &&
+                                pokemon.evolution.next.length > 0 &&
+                                pokemon.evolution.next.map(
+                                  (evolution: Evolution) => (
+                                    <div key={evolution.name}>
+                                      <p>
+                                        Prochaine évolution : {evolution.name}
+                                      </p>
+                                      <p>Condition : {evolution.condition}</p>
+                                    </div>
+                                  )
+                                )}
+                              {pokemon.evolution.mega &&
+                                pokemon.evolution.mega.name && (
+                                  <div>
                                     <p>
-                                      Prochaine évolution : {evolution.name}
+                                      Méga évolution :{' '}
+                                      {pokemon.evolution.mega.name}
                                     </p>
-                                    <p>Condition : {evolution.condition}</p>
+                                    <p>
+                                      Condition :{' '}
+                                      {pokemon.evolution.mega.condition}
+                                    </p>
                                   </div>
-                                )
-                              )}
-                            {pokemon.evolution.mega &&
-                              pokemon.evolution.mega.name && (
-                                <div>
-                                  <p>
-                                    Méga évolution :{' '}
-                                    {pokemon.evolution.mega.name}
-                                  </p>
-                                  <p>
-                                    Condition :{' '}
-                                    {pokemon.evolution.mega.condition}
-                                  </p>
-                                </div>
-                              )}
-                          </>
-                        )}
+                                )}
+                            </>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -242,6 +253,11 @@ const Cards = () => {
           )}
         </div>
       </div>
+      <button
+        onClick={handleClickCatched}
+        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40 transition duration-500 ease-in-out transform hover:scale-105 mt-5 ${isClicked ? 'animate-pulse' : ''}`}>
+        Catch !
+      </button>
       <PaginationCards currentId={Number(id)} />
     </>
   );
