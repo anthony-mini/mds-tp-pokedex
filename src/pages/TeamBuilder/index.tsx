@@ -19,7 +19,7 @@ const TeamBuilder = () => {
   return (
     <React.Fragment>
       <Header />
-      <h1 className="text-4xl font-bold text-center mb-5 mt-5">Team Builder</h1>
+      <h1 className="text-2xl font-bold text-center mb-5 mt-5">Mes Pokémons</h1>
       <section className="section">
         <div className="bloc-card flex">
           {pokemonList.map((pokemon, index) => (

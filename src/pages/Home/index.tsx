@@ -77,7 +77,7 @@ const Home: React.FC = () => {
       <main className="mx-6">
         <section className="mb-6">
           <div className="pagination-grid">
-            <div className="pagination-bloc-2 flex flex-wrap justify-center">
+            <div className="filter-bloc">
               <MultiSearchComponent
                 setSelectedPokemons={setSelectedPokemons}
                 pokemons={selectedGen === '0' ? currentData : currentData}
@@ -88,12 +88,12 @@ const Home: React.FC = () => {
                 onChange={handleSelectChange}
               />
             </div>
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-            />
           </div>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+          />
           {isLoading ? (
             <div className="animate-spin-slow h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
           ) : (

@@ -42,19 +42,43 @@
 }
 
 .pokemonCardsContainer:active {
-  // Ajoute un effet lors du clic sur la carte
   transform: scale(0.95);
 }
 
 .bloc-card {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  animation: fadeIn 0.5s; // Ajoute une animation d'apparition progressive
+  animation: fadeIn 0.5s;
+  justify-content: center;
+
+  > * {
+    flex: 1 0 20%;
+    max-width: 150px;
+
+    @media (min-width: 1200px) {
+      flex: 1 0 25%;
+    }
+
+    @media (min-width: 992px) and (max-width: 1199px) {
+      flex: 1 0 33.33%;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      flex: 1 0 50%;
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+      flex: 1 0 50%;
+    }
+
+    @media (max-width: 575px) {
+      flex: 1 0 100%;
+    }
+  }
 }
 
 @keyframes fadeIn {
-  // Définit l'animation d'apparition progressive
   from {
     opacity: 0;
   }
