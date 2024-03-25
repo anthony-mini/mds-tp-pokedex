@@ -18,12 +18,10 @@ const Cards = () => {
     setIsClicked(true);
 
     if (pokemon?.pokedex_id === 25) {
-      const audio = new Audio(
-        '/src/assets/vine-who-is-that-pokemon-its-pikachu.mp3'
-      );
+      const audio = new Audio('/vine-who-is-that-pokemon-its-pikachu.mp3');
       audio.play();
     } else {
-      const audio = new Audio('/src/assets/06-caught-a-pokemon.mp3');
+      const audio = new Audio('/06-caught-a-pokemon.mp3');
       audio.play();
     }
 
