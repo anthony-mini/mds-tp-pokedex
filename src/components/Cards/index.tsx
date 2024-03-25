@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { getPokemonById } from '../../services';
+import { getPokemonById, setItem } from '../../services';
 import { Data, Type, Evolution } from '../../interfaces';
 import { hpIcon, shiny, EvolutionLogo } from '../../assets';
 import { PaginationCards } from '../index';
@@ -247,6 +247,10 @@ const Cards = () => {
         </div>
       </div>
       <PaginationCards currentId={Number(id)} />
+      <button
+        onClick={() => pokemon && setItem(String(pokemon.pokedex_id), pokemon)}>
+        Catch !
+      </button>
     </>
   );
 };
