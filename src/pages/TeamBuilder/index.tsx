@@ -28,6 +28,9 @@ const TeamBuilder = () => {
               <img src={pokemon.sprites?.regular} alt={pokemon.name?.fr} />
               <button
                 onClick={() => {
+                  const audio = new Audio('/035-clefairy.mp3');
+                  audio.play();
+
                   removeItem(String(pokemon.pokedex_id));
                   setPokemonList(
                     pokemonList.filter((p) => p.name?.fr !== pokemon.name?.fr)

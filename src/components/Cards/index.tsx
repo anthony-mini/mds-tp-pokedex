@@ -20,6 +20,9 @@ const Cards = () => {
     if (pokemon?.pokedex_id === 25) {
       const audio = new Audio('/vine-who-is-that-pokemon-its-pikachu.mp3');
       audio.play();
+    } else if (pokemon?.pokedex_id === 52) {
+      const audio = new Audio('/m-e-o-w.mp3');
+      audio.play();
     } else {
       const audio = new Audio('/06-caught-a-pokemon.mp3');
       audio.play();
