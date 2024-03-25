@@ -151,16 +151,18 @@ const Cards = () => {
                   />
                 </div>
                 <div className="card-footer">
-                  {pokemon.types &&
-                    pokemon.types.map((type: Type) => (
-                      <div key={type.name}>
-                        <img
-                          src={type.image}
-                          alt={type.name}
-                          className="footer-icon"
-                        />
-                      </div>
-                    ))}
+                  <div className="bloc-type">
+                    {pokemon.types &&
+                      pokemon.types.map((type: Type) => (
+                        <div key={type.name}>
+                          <img
+                            src={type.image}
+                            alt={type.name}
+                            className="footer-icon"
+                          />
+                        </div>
+                      ))}
+                  </div>
                   {pokemon.stats && (
                     <div className="hp-container">
                       <p className="hp">{pokemon.stats?.hp}</p>
@@ -173,45 +175,47 @@ const Cards = () => {
                         <button onClick={() => setShowPopup(false)}>
                           Fermer
                         </button>
-                        {pokemon.evolution && (
-                          <>
-                            {pokemon.evolution.pre &&
-                              pokemon.evolution.pre.length > 0 &&
-                              pokemon.evolution.pre.map(
-                                (evolution: Evolution) => (
-                                  <div key={evolution.name}>
-                                    <p>Pré-évolution : {evolution.name}</p>
-                                    <p>Condition : {evolution.condition}</p>
-                                  </div>
-                                )
-                              )}
-                            {pokemon.evolution.next &&
-                              pokemon.evolution.next.length > 0 &&
-                              pokemon.evolution.next.map(
-                                (evolution: Evolution) => (
-                                  <div key={evolution.name}>
+                        <div className="bloc-text-evol">
+                          {pokemon.evolution && (
+                            <>
+                              {pokemon.evolution.pre &&
+                                pokemon.evolution.pre.length > 0 &&
+                                pokemon.evolution.pre.map(
+                                  (evolution: Evolution) => (
+                                    <div key={evolution.name}>
+                                      <p>Pré-évolution : {evolution.name}</p>
+                                      <p>Condition : {evolution.condition}</p>
+                                    </div>
+                                  )
+                                )}
+                              {pokemon.evolution.next &&
+                                pokemon.evolution.next.length > 0 &&
+                                pokemon.evolution.next.map(
+                                  (evolution: Evolution) => (
+                                    <div key={evolution.name}>
+                                      <p>
+                                        Prochaine évolution : {evolution.name}
+                                      </p>
+                                      <p>Condition : {evolution.condition}</p>
+                                    </div>
+                                  )
+                                )}
+                              {pokemon.evolution.mega &&
+                                pokemon.evolution.mega.name && (
+                                  <div>
                                     <p>
-                                      Prochaine évolution : {evolution.name}
+                                      Méga évolution :{' '}
+                                      {pokemon.evolution.mega.name}
                                     </p>
-                                    <p>Condition : {evolution.condition}</p>
+                                    <p>
+                                      Condition :{' '}
+                                      {pokemon.evolution.mega.condition}
+                                    </p>
                                   </div>
-                                )
-                              )}
-                            {pokemon.evolution.mega &&
-                              pokemon.evolution.mega.name && (
-                                <div>
-                                  <p>
-                                    Méga évolution :{' '}
-                                    {pokemon.evolution.mega.name}
-                                  </p>
-                                  <p>
-                                    Condition :{' '}
-                                    {pokemon.evolution.mega.condition}
-                                  </p>
-                                </div>
-                              )}
-                          </>
-                        )}
+                                )}
+                            </>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
