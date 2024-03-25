@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Error, Home, PokemonDetail } from '../pages';
+import { Error, Home, PokemonDetail, TeamBuilder } from '../pages';
 
 function App() {
   return (
@@ -11,6 +11,10 @@ function App() {
         <Route
           path="/pokemon/:id"
           element={(<PokemonDetail />) as React.ReactNode}
+        />
+        <Route
+          path="/team-builder"
+          element={(<TeamBuilder />) as React.ReactNode}
         />
       </Routes>
     </Router>

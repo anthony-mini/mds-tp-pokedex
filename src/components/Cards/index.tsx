@@ -246,11 +246,12 @@ const Cards = () => {
           )}
         </div>
       </div>
-      <PaginationCards currentId={Number(id)} />
       <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40 transition duration-500 ease-in-out transform hover:scale-105 mt-5"
         onClick={() => pokemon && setItem(String(pokemon.pokedex_id), pokemon)}>
         Catch !
       </button>
+      <PaginationCards currentId={Number(id)} />
     </>
   );
 };
