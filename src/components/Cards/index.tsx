@@ -11,6 +11,13 @@ const Cards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [cardClass, setCardClass] = useState('card-default');
   const [isShiny, setIsShiny] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClickCatched = () => {
+    pokemon && setItem(String(pokemon.pokedex_id), pokemon);
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 1000);
+  };
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -247,8 +254,8 @@ const Cards = () => {
         </div>
       </div>
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40 transition duration-500 ease-in-out transform hover:scale-105 mt-5"
-        onClick={() => pokemon && setItem(String(pokemon.pokedex_id), pokemon)}>
+        onClick={handleClickCatched}
+        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40 transition duration-500 ease-in-out transform hover:scale-105 mt-5 ${isClicked ? 'animate-pulse' : ''}`}>
         Catch !
       </button>
       <PaginationCards currentId={Number(id)} />
